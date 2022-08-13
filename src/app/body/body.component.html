@@ -1,0 +1,8 @@
+<button class="btn btn-primary" ng>Button</button>
+<app-expenses-table></app-expenses-table>
+<div *ngIf="!authenticated">
+    <app-login-form></app-login-form>
+</div>
+<div *ngIf="authenticated">
+    <button type="button" class="btn btn-danger btn-google " (click)="logout()">Logout</button>
+</div>

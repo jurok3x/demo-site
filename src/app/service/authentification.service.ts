@@ -17,7 +17,9 @@ const httpOptions = {
 })
 export class AuthentificationService {
 
-  private apiServerUrl = environment.authApi;
+  private apiServerUrl = environment.apiUrl;
+
+  private analyticsApiServerUrl = environment.analyticsApiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -27,15 +29,19 @@ export class AuthentificationService {
     this.jwtString = '' + localStorage.getItem(environment.tokenName);
     let headers = new HttpHeaders().set('Authorization', this.jwtString);
     let options = { headers: headers };
-    user.enabled=false;
-    return this.http.put<User>(`${this.apiServerUrl}users/${user.id}`, user, options);
+    return this.http.put<User>(`${this.apiServerUrl}update/${user.id}`, user, options);
 }
 
 public registration(user: User): Observable<User>{
-    return this.http.post<User>(`${this.apiServerUrl}signup`, user);
+    return this.http.post<User>(`${this.apiServerUrl}auth/signup`, user);
 }
 
 public login(loginModel: LoginModel): Observable<AuthResponse>{
-    return this.http.post<AuthResponse>(`${this.apiServerUrl}login`, loginModel);
+    return this.http.post<AuthResponse>(`${this.apiServerUrl}auth/signin`, loginModel);
 }
+
+public analyticsLogin(loginModel: LoginModel): Observable<AuthResponse>{
+  return this.http.post<AuthResponse>(`${this.analyticsApiServerUrl}auth/signin`, loginModel);
+}
+
 }

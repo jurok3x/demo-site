@@ -8,8 +8,8 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class UsersService {
-  jwtString: string;
-  private apiServerUrl = environment.api + 'users/';
+  jwtString: string | undefined;
+  private apiServerUrl = environment.apiUrl + 'users/';
 
   constructor(private http: HttpClient) { }
 
