@@ -9,8 +9,6 @@ import { Expense } from '../model/expense';
 })
 export class ExpensesService {
 
-  private apiServerUrl = environment.apiUrl + 'expenses/';
-
   constructor(private http: HttpClient) { }
 
   jwtString: string | undefined;
@@ -25,6 +23,6 @@ export class ExpensesService {
         year: '2022',
         month: '2'
       }};
-    return this.http.get<Expense[]>(`${this.apiServerUrl}user/${userId}`, options);
+    return this.http.get<Expense[]>(`${environment.apiUrl}api/expenses/user/${userId}`, options);
   }
 }

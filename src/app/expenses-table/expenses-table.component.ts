@@ -20,7 +20,7 @@ export class ExpensesTableComponent implements OnInit {
   constructor(
     private expensesService: ExpensesService
   ) {
-    this.userId  = this.helper.decodeToken(localStorage.getItem(environment.tokenName)|| '').id;
+    
   }
 
   formatDate = (date: Date) => {
@@ -30,6 +30,9 @@ export class ExpensesTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem(environment.tokenName)){
+      this.userId  = this.helper.decodeToken(localStorage.getItem(environment.tokenName)|| '').id;
+    }
     this.getExpenses();
   }
 

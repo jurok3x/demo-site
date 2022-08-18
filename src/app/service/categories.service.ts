@@ -9,8 +9,6 @@ import { Category } from '../model/category';
 })
 export class CategoriesService {
 
-  private apiServerUrl = environment.apiUrl + 'categories/';
-
   constructor(private http: HttpClient) { }
 
   jwtString: string | undefined;
@@ -19,6 +17,6 @@ export class CategoriesService {
     this.jwtString = 'Bearer ' + localStorage.getItem(environment.tokenName);
     let headers = new HttpHeaders().set('Authorization', this.jwtString);
     let options = {headers: headers};
-    return this.http.get<Category[]>(`${this.apiServerUrl}user/${userId}`, options);
+    return this.http.get<Category[]>(`${environment.apiUrl}api/categories/user/${userId}`, options);
   }
 }

@@ -18,6 +18,7 @@ export class BodyComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.authenticated);
     Emitters.authEmitter.subscribe(
       () => {
         this.authenticated = !this.helper.isTokenExpired(localStorage.getItem(environment.tokenName)?.toString());

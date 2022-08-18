@@ -30,7 +30,9 @@
               "src/custom-theme.scss",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "materialize-css/dist/js/materialize.js"
+            ]
           },
           "configurations": {
             "production": {
