@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://myapp-12344.herokuapp.com/api/',
-  analyticsApiUrl: 'https://financemanager-analytics.herokuapp.com/',
   siteUrl: 'http://localhost:4200/',
+  apiUrl: 'https://myapp-12344.herokuapp.com/',
+  analyticsApiUrl: 'https://financemanager-analytics.herokuapp.com/',
   tokenName: 'jwt-token',
   analyticsTokenName: 'analytics-jwt-token',
   title: 'Finance App'

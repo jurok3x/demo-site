@@ -1,15 +1,24 @@
-<form [formGroup]="form" class="form-horizontal" role="form">
-    <div class="form-group">
-      <label class="col-lg-3 control-label login-text">Email:</label>
-      <div class="col-lg-8">
-        <input formControlName="email" class="form-control" type="text" value="">
+<form [formGroup]="form" class="card" (ngSubmit)="onSubmit()">
+  <div class="card-content">
+      <span class="card-title">Вхід в систему</span>
+      <div class="input-field">
+          <input formControlName="email" id="email" type="email" [ngClass]="{'invalid': form.get('email')?.invalid && form.get('email')?.touched}">
+          <label for="email">Email:</label>
+          <span class="helper-text red-text" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            <span *ngIf="form.get('email')?.hasError('required')">Заповніть поле</span>
+            <span *ngIf="form.get('email')?.hasError('email')">Введіть коректний email адрес</span>
+          </span>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="col-lg-3 control-label login-text">Password:</label>
-      <div class="col-lg-8">
-        <input formControlName="password" class="form-control" type="password" value="">
+      <div class="input-field">
+          <input id="password" formControlName="password" type="password" [ngClass]="{'invalid': form.get('password')?.invalid && form.get('password')?.touched}">
+          <label for="password">Пароль:</label>
+          <span class="helper-text red-text" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+            <span *ngIf="form.get('password')?.hasError('required')">Заповніть поле</span>
+            <span *ngIf="form.get('password')?.hasError('minlength')">Пароль повинен містити більше 6 символів</span>
+          </span>
       </div>
-      <button type="button" class="btn btn-success btn-google " (click)="login()">Login</button>
-    </div>
+  </div>
+  <div class="card-action">
+      <button [disabled]="form.invalid || form.disabled" type="submit" class="modal-action btn waves-effect">Вхід</button>
+  </div>
 </form>
