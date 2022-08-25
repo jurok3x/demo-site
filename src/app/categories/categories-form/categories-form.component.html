@@ -1,0 +1,45 @@
+<div class="page-title">
+    <h4>
+        <a routerLink="/categories">Категорії</a>
+        <i class="material-icons">keyboard_arrow_right</i>
+        {{isNew ? 'Додати' : 'Редагувати'}} категорію
+    </h4>
+    <span>
+        <button class="btn btn-small red" (click)="delete()" *ngIf="!isNew">
+          <i class="material-icons">delete</i>
+        </button>
+      </span>
+</div>
+
+<div class="row">
+    <form class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class=" category-name input-field">
+            <input id="name" type="text"  formControlName="name"
+            [ngClass]="{'invalid': form.get('name')?.invalid && form.get('name')?.touched}">
+            <label for="name">Назва</label>
+            <span class="helper-text red-text" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+                Введіть ім'я категорії
+            </span>
+        </div>
+
+        <div>
+            <button class="waves-effect waves-light btn" type="submit" [disabled]="form.invalid || form.disabled">
+                Зберегти зміни
+            </button>
+        </div>
+    </form>
+
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <div class="page-subtitle">
+            <h4>Популярне:</h4>
+            
+            
+        </div>
+        <div *ngIf="category">
+            <app-popular-expenses [categoryId]="category.id"></app-popular-expenses>
+        </div>
+    </div>
+</div>

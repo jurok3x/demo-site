@@ -4,7 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthResponse } from '../model/authResponse';
-import { LoginModel } from '../model/loginModel';
+import { LoginModel } from '../model/loginmodel';
 import { SaveUserModel } from '../model/saveUserModel';
 import { User } from '../model/user';
 

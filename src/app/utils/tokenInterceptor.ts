@@ -14,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor{
             if(this.authService.isAnalyticsAuthenticated()){
                 req = req.clone({
                     setHeaders: {
-                        Autorization: this.authService.getAnalyticsTApioken()
+                        Authorization: this.authService.getAnalyticsTApioken()
                     }
                 })
             }
@@ -27,7 +27,7 @@ export class TokenInterceptor implements HttpInterceptor{
             if(this.authService.isApiAuthenticated()){
                 req = req.clone({
                     setHeaders: {
-                        Autorization: this.authService.getApiToken()
+                        Authorization: this.authService.getApiToken()
                     }
                 })
             }

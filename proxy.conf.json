@@ -1,0 +1,12 @@
+{
+    "/api/analytics/**": {
+        "target": "https://financemanager-analytics.herokuapp.com/",
+        "logLevel": "debug",
+        "changeOrigin": true
+    },
+    "/api/**": {
+        "target": "https://myapp-12344.herokuapp.com/",
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

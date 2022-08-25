@@ -1,0 +1,28 @@
+<div class="w400" *ngIf=" popularExpenses$ | async as expenses; else loader">
+    <table mat-table [dataSource] = expenses class="mat-elevation-z8">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> № </th>
+        <td mat-cell *matCellDef="let exspense; let i = index"> {{i+1}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Назва </th>
+        <td mat-cell *matCellDef="let exspense"> {{exspense.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Вартість </th>
+        <td mat-cell *matCellDef="let exspense"> {{exspense.sum}} </td>
+      </ng-container>
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef> Кількість </th>
+        <td mat-cell *matCellDef="let exspense"> {{exspense.count}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<ng-template #empty>
+  <div class="center">У вас немає категорій</div>
+</ng-template>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
