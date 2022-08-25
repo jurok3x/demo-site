@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
@@ -14,9 +14,22 @@ export class CategoriesService {
   jwtString: string | undefined;
 
   public findAll(userId: number): Observable<Category[]>{
-    this.jwtString = 'Bearer ' + localStorage.getItem(environment.tokenName);
-    let headers = new HttpHeaders().set('Authorization', this.jwtString);
-    let options = {headers: headers};
-    return this.http.get<Category[]>(`${environment.apiUrl}api/categories/user/${userId}`, options);
+    return this.http.get<Category[]>(`${environment.apiUrl}api/categories/user/${userId}`);
+  }
+
+  public findById(categoryId: number): Observable<Category>{
+    return this.http.get<Category>(`${environment.apiUrl}api/categories/${categoryId}`);
+  }
+
+  public save(category: Category): Observable<Category>{
+    return this.http.post<Category>(`${environment.apiUrl}api/categories`, category);
+  }
+
+  public update(category: Category): Observable<Category>{
+    return this.http.put<Category>(`${environment.apiUrl}api/categories/${category.id}`, category);
+  }
+  
+  public delete(categoryId: number) {
+    return this.http.delete<any>(`${environment.apiUrl}api/categories/${categoryId}`);
   }
 }

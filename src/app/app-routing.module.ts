@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { CategoriesComponent } from './categories/categories.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LogoutComponent } from './logout/logout.component';
+import { MainComponent } from './main/main.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthGuard } from './utils/auth.guard';
 
@@ -14,7 +18,13 @@ const routes: Routes = [
     { path: 'login', component: LoginFormComponent },
     { path: 'registration', component: RegistrationComponent }
   ] },
-  { path: 'main', canActivate: [AuthGuard], component: SiteLayoutComponent }
+  { path: '', canActivate: [AuthGuard], component: SiteLayoutComponent, children: [
+    { path: 'main', component: MainComponent },
+    { path: 'analytics', component: AnalyticsComponent },
+    { path: 'categories', component: CategoriesComponent },
+    { path: 'categories/new', component: CategoriesFormComponent },
+    { path: 'categories/:id', component: CategoriesFormComponent }
+  ] }
 ];
 
 @NgModule({
