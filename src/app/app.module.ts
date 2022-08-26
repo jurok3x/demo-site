@@ -29,6 +29,7 @@ import { CategoriesFormComponent } from './categories/categories-form/categories
 import { PopularExpensesComponent } from './expenses/popular-expenses/popular-expenses.component';
 import {MatInputModule} from '@angular/material/input';
 import { DatepartSelectComponent } from './datepart-select/datepart-select.component';
+import { ExpensesFormComponent } from './expenses/expenses-form/expenses-form.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { DatepartSelectComponent } from './datepart-select/datepart-select.compo
     LoaderComponent,
     CategoriesFormComponent,
     PopularExpensesComponent,
-    DatepartSelectComponent
+    DatepartSelectComponent,
+    ExpensesFormComponent
   ],
   imports: [
     BrowserModule,
