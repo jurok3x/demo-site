@@ -1,8 +1,7 @@
 export interface RequestParams {
-    userId?: number,
-    categoryId?: number,
-    year?: number,
-    month?: number,
-    page?: number,
-    limit?: number
+    categoryId?: number | null,
+    year?: number | null,
+    month?: number | null,
+    page?: number | null,
+    limit?: number | null
 }

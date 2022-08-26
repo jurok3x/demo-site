@@ -1,19 +1,22 @@
 <h4>Рік:</h4>
-<mat-form-field appearance="fill" *ngIf="years$ | async as years">
+<mat-form-field  appearance="fill" >
     <mat-label>Виберіть рік</mat-label>
-      <mat-select (selectionChange)="changeYear()" [value]="selected">
-        <mat-option>Весь час</mat-option>
-        <mat-option *ngFor="let year of years" value="{{year}}">{{year}}</mat-option>
+      <mat-select (selectionChange)="changeYear(year.value)" [(value)]="currentYear" #year>
+        <mat-option [value]="null">Весь час</mat-option>
+        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
       </mat-select>
 </mat-form-field>
 
-<h4>Місяць:</h4>
-<mat-form-field appearance="fill">
-  <mat-label>Виберіть місяць</mat-label>
-  <mat-select>
-    <mat-option>Весь час</mat-option>
-    <mat-option *ngFor="let month of months" [value]="months.indexOf(month)">
-      {{month}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+
+
+  <h4>Місяць:</h4>
+  <mat-form-field  appearance="fill" >
+    <mat-label>Виберіть місяць</mat-label>
+    <mat-select (selectionChange)="changeMonth(month.value)" [(value)]="currentMonth" #month>
+      <mat-option [value]="null">Весь час</mat-option>
+      <mat-option *ngFor="let month of months" [value]="months.indexOf(month)">
+        {{month}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+

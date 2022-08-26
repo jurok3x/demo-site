@@ -10,6 +10,13 @@ export class TokenInterceptor implements HttpInterceptor{
         private router: Router){}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if(req.url.includes('auth')){
+            return next.handle(req).pipe(
+                catchError(
+                    (error: HttpErrorResponse) => this.handleAutthError(error)
+                )
+            ) 
+        }
         if(req.url.includes('analytics')){
             if(this.authService.isAnalyticsAuthenticated()){
                 req = req.clone({
