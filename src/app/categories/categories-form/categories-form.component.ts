@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { of, switchMap } from 'rxjs';
+import { concatMap, of, switchMap } from 'rxjs';
 import { Category } from 'src/app/model/category';
 import { CategoriesService } from 'src/app/service/categories.service';
 import { MaterialsService } from 'src/app/service/material.service';
+import { UsersService } from 'src/app/service/users.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-categories-form',
@@ -19,6 +21,7 @@ export class CategoriesFormComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private categoriesService: CategoriesService,
+    private usersService: UsersService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -53,34 +56,52 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   onSubmit(){
-    let obs$ 
     this.form.disable()
     if(this.isNew) {
-      obs$ = this.categoriesService.save(this.form.getRawValue()) // add user
+      this.categoriesService.save(this.form.getRawValue()).pipe(
+        concatMap(
+          category => {
+            if(category.id){
+              return this.usersService.addCategory(parseInt(localStorage.getItem(environment.userIdName) || ''), category.id)
+            }
+            return of(null)
+          }
+        )
+      ).subscribe(
+        {
+          next:() => {
+            MaterialsService.toast('Зміни збережено')
+            this.form.enable()
+            this.router.navigate(['/categories'])
+          },
+          error: (error: Error) => {
+            MaterialsService.toast(error.message)
+            this.form.enable()
+        }
+      }
+      )
     } else {
       this.category.name = this.form.value.name
-      obs$ = this.categoriesService.update(this.category)
-    }
-    obs$.subscribe(
-      {
-        next: category => {
-          MaterialsService.toast('Зміни збережено')
-          this.form.enable()
-          this.category = category
-        },
-        error: error => {
-          MaterialsService.toast(error.error.message)
-          this.form.enable()
+      this.categoriesService.update(this.category).subscribe(
+        {
+          next: (category: Category) => {
+            MaterialsService.toast('Зміни збережено')
+            this.form.enable()
+            this.category = category
+          },
+          error: (error: Error) => {
+            MaterialsService.toast(error.message)
+            this.form.enable()
+          } 
         }
-        
-      }
-    )
+      )
+    }
   }
 
   delete() {
     const decision = window.confirm('Ви точно бажаєте видалити категорію?')
     if(decision){
-      this.categoriesService.delete(this.category.id).subscribe(
+      this.usersService.removeCategory(parseInt(localStorage.getItem(environment.userIdName) || ''), this.category.id || 0).subscribe(
         {
           next: () => MaterialsService.toast('Категорія видалена'),
           error: error => MaterialsService.toast(error.error.message),

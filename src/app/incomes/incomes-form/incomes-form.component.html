@@ -3,9 +3,9 @@
         <mat-card-title>
             <div class="page-title">
                 <h4>
-                    <a routerLink="/main">Витрати</a>
+                    <a routerLink="/incomes">Доходи</a>
                     <i class="material-icons">keyboard_arrow_right</i>
-                    {{isNew ? 'Додати' : 'Редагувати'}} витрату
+                    {{isNew ? 'Додати' : 'Редагувати'}} дохід
                 </h4>
             </div>
         </mat-card-title>
@@ -22,12 +22,12 @@
                             </span>
                         </div>
                         <div class="input-field w100">
-                            <input id="price" type="text"  formControlName="price"
-                            [ngClass]="{'invalid': form.get('price')?.invalid && form.get('price')?.touched}">
-                            <label for="price">Ціна</label>
-                            <span class="helper-text red-text" *ngIf="form.get('price')?.invalid && form.get('price')?.touched">
+                            <input id="amount" type="text"  formControlName="amount"
+                            [ngClass]="{'invalid': form.get('amount')?.invalid && form.get('amount')?.touched}">
+                            <label for="amount">Величина</label>
+                            <span class="helper-text red-text" *ngIf="form.get('amount')?.invalid && form.get('amount')?.touched">
                                 <span *ngIf="form.get('price')?.hasError('required')">Заповніть поле</span>
-                                <span *ngIf="form.get('price')?.hasError('pattern')">Некоректний формат ціни. Правильний формат: 99.99</span>
+                                <span *ngIf="form.get('price')?.hasError('pattern')">Некоректний формат доходу. Правильний формат: 99.99</span>
                             </span>
                         </div>
                         <button class="waves-effect waves-light btn" type="submit" [disabled]="form.invalid || form.disabled">
@@ -35,9 +35,6 @@
                         </button>
                     </div>
                     <div class="col-6">
-                        <div class="input-field">
-                            <app-category-select [parentForm]="form"></app-category-select>
-                        </div>
                         <div class="input-field">
                             <mat-form-field appearance="fill">
                                 <mat-label>Виберіть дату</mat-label>

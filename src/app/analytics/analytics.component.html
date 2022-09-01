@@ -1,1 +1,20 @@
-<p>analytics works!</p>
+<div class="row">
+    <mat-card class="col-12">
+        <mat-card-title>
+            <div class="page-title">
+                <h4>Аналітика</h4>
+            </div>
+        </mat-card-title>
+        <mat-card-content>
+            <mat-tab-group>
+                <mat-tab label="Річні витрати">
+                    <app-month-analytics></app-month-analytics>
+                </mat-tab>
+                <mat-tab label="По категоріям">
+                    <app-category-analytics></app-category-analytics>
+                </mat-tab>
+                <mat-tab label="Third"> Content 3 </mat-tab>
+              </mat-tab-group>
+        </mat-card-content>
+    </mat-card>
+</div>

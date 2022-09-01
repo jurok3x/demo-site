@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -8,36 +8,26 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class UsersService {
-  jwtString: string | undefined;
-  private apiServerUrl = environment.apiUrl + 'users/';
 
   constructor(private http: HttpClient) { }
 
   public getUsers(): Observable<User[]>{
-    this.jwtString = 'Bearer ' + localStorage.getItem(environment.tokenName);
-    let headers = new HttpHeaders().set('Authorization', this.jwtString);
-    let options = { headers: headers };
-    return this.http.get<User[]>(`${this.apiServerUrl}`, options);
+    return this.http.get<User[]>(`${environment.apiUrl}api/users`);
 }
 
 public getUserById(userId: number): Observable<User>{
-  this.jwtString = 'Bearer ' + localStorage.getItem(environment.tokenName);
-  let headers = new HttpHeaders().set('Authorization', this.jwtString);
-  let options = { headers: headers };
-  return this.http.get<User>(`${this.apiServerUrl}${userId}`, options);
+  return this.http.get<User>(`${environment.apiUrl}api/users/${userId}`);
 }
 
-public updateUser(user: User): Observable<User>{
-  this.jwtString = 'Bearer ' + localStorage.getItem(environment.tokenName);
-  let headers = new HttpHeaders().set('Authorization', this.jwtString);
-  let options = { headers: headers };
-  return this.http.put<User>(`${this.apiServerUrl}`, user, options);
+public update(user: User): Observable<User>{
+  return this.http.put<User>(`${environment.apiUrl}api/users/${user.id}`, user);
 }
 
-public addUser(user: User): Observable<User>{
-  this.jwtString = 'Bearer ' + localStorage.getItem(environment.tokenName);
-  let headers = new HttpHeaders().set('Authorization', this.jwtString);
-  let options = { headers: headers };
-  return this.http.post<User>(`${this.apiServerUrl}/signup`, user, options);
+public addCategory(userId: number, categoryId: number): Observable<User>{
+  return this.http.get<User>(`${environment.apiUrl}api/users/${userId}/add/category/${categoryId}`);
+}
+
+public removeCategory(userId: number, categoryId: number): Observable<User>{
+  return this.http.get<User>(`${environment.apiUrl}api/users/${userId}/remove/category/${categoryId}`);
 }
 }

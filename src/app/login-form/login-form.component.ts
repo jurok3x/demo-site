@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { forkJoin, Subscription, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthentificationService } from '../service/authentification.service';
 import { MaterialsService } from '../service/material.service';
 
@@ -13,7 +15,7 @@ import { MaterialsService } from '../service/material.service';
 export class LoginFormComponent implements OnInit, OnDestroy {
   
   form!: FormGroup;
-
+  helper = new JwtHelperService();
   aSub!: Subscription;
   
   constructor(
@@ -53,7 +55,11 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       this.authService.login(this.form.getRawValue()),
       this.authService.analyticsLogin(this.form.getRawValue())
     ]).subscribe({
-      next: () => this.router.navigate(['/main']),
+      next: () => {
+        localStorage.setItem(environment.userIdName,
+          this.helper.decodeToken(localStorage.getItem(environment.tokenName)|| '').id)
+        this.router.navigate(['/main'])
+      },
       error: error => {
         MaterialsService.toast(error.error.message)
         this.form.enable()

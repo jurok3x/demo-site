@@ -19,7 +19,8 @@ export class DatepartSelectComponent implements OnInit {
   months = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень',
 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень']
  @Output() yearEvent = new EventEmitter<number>();
- @Output() monthEvent = new EventEmitter<number>(); 
+ @Output() monthEvent = new EventEmitter<number>();
+ @Input('isMonth') isMonth: boolean = true
 
   constructor(private utilsService: AnalyticsUtilsService) { }
 

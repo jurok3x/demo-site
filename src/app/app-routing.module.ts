@@ -4,6 +4,8 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ExpensesFormComponent } from './expenses/expenses-form/expenses-form.component';
+import { IncomesFormComponent } from './incomes/incomes-form/incomes-form.component';
+import { IncomesComponent } from './incomes/incomes.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -25,7 +27,11 @@ const routes: Routes = [
     { path: 'main/expenses/:id', component: ExpensesFormComponent },
     { path: 'categories', component: CategoriesComponent },
     { path: 'categories/new', component: CategoriesFormComponent },
-    { path: 'categories/:id', component: CategoriesFormComponent }
+    { path: 'categories/:id', component: CategoriesFormComponent },
+    { path: 'analytics', component: AnalyticsComponent },
+    { path: 'incomes', component: IncomesComponent },
+    { path: 'incomes/new', component: IncomesFormComponent },
+    { path: 'incomes/:id', component: IncomesFormComponent }
   ] }
 ];
 

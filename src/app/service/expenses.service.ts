@@ -29,4 +29,16 @@ export class ExpensesService {
   public findById(expenseId: number): Observable<Expense>{
     return this.http.get<Expense>(`${environment.apiUrl}api/expenses/${expenseId}`);
   }
+
+  public save(expense: Expense): Observable<Expense>{
+    return this.http.post<Expense>(`${environment.apiUrl}api/expenses`, expense)
+  }
+
+  public update(expense: Expense): Observable<Expense>{
+    return this.http.put<Expense>(`${environment.apiUrl}api/expenses/${expense.id}`, expense)
+  }
+
+  public delete(expenseId: number): Observable<any>{
+    return this.http.delete<any>(`${environment.apiUrl}api/expenses/${expenseId}`)
+  }
 }
