@@ -1,8 +1,15 @@
 <h4>Категорія:</h4>
-<mat-form-field appearance="fill" *ngIf="categories$ | async as categories">
+<mat-form-field appearance="fill" *ngIf="categories && parentForm" [formGroup]="parentForm">
     <mat-label>Виберіть категорію</mat-label>
-      <mat-select (selectionChange)="changeCategory(categoryId.value)" #categoryId>
-        <mat-option>Всі категорії</mat-option>
+      <mat-select #categoryId [formControlName]="'category'">
         <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
       </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill" *ngIf="categories && !parentForm">
+  <mat-label>Виберіть категорію</mat-label>
+    <mat-select (selectionChange)="changeCategory(categoryId.value)" #categoryId >
+      <mat-option>Всі категорії</mat-option>
+      <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
+    </mat-select>
 </mat-form-field>

@@ -1,2 +1,20 @@
 @import "~materialize-css/dist/css/materialize.min.css";
 @import "assets/styles/styles.min.css";
+
+.advanced-pie-legend  .legend-items-container  .legend-items
+.legend-item .item-value {
+    margin: 10px !important; 
+}
+
+.legend-items{
+    width: 600px;
+}
+
+.total-value{
+    margin-bottom: 10px
+}
+
+
+ .advanced-pie{
+    height: 200px;
+ }

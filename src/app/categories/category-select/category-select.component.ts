@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MaterialsService } from 'src/app/service/material.service';
 import { environment } from 'src/environments/environment';
 import { Category } from '../../model/category';
 import { CategoriesService } from '../../service/categories.service';
@@ -12,16 +12,17 @@ import { CategoriesService } from '../../service/categories.service';
 })
 export class CategorySelectComponent implements OnInit {
 
-  categories$!: Observable<Category[]>;
-  helper = new JwtHelperService();
-  userId! : number;
+  categories: Category[] = [];
+  @Input() parentForm! : FormGroup;
   @Output() categoryEvent = new EventEmitter<number>();
 
   constructor(private categoryService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.userId  = this.helper.decodeToken(localStorage.getItem(environment.tokenName)|| '').id;
-    this.categories$ = this.categoryService.findAll(this.userId);
+    
+    this.categoryService.findAll(parseInt(localStorage.getItem(environment.userIdName) || '')).subscribe(
+      result => this.categories = result
+    )
   }
 
   changeCategory(categoryId: number){

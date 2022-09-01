@@ -1,5 +1,5 @@
 export interface Category{
-    id: number;
-    name: string;
-    usersId: number[]
+    id?: number;
+    name?: string;
+    usersId?: number[]
 }

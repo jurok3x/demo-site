@@ -1,32 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Income } from 'src/app/model/income';
 import { of, switchMap } from 'rxjs';
-import { Expense } from 'src/app/model/expense';
-import { ExpensesService } from 'src/app/service/expenses.service';
+import { IncomesService } from 'src/app/service/incomes.service';
 import { MaterialsService } from 'src/app/service/material.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-expenses-form',
-  templateUrl: './expenses-form.component.html',
-  styleUrls: ['./expenses-form.component.css']
+  selector: 'app-incomes-form',
+  templateUrl: './incomes-form.component.html',
+  styleUrls: ['./incomes-form.component.css']
 })
-export class ExpensesFormComponent implements OnInit {
+export class IncomesFormComponent implements OnInit {
 
   form!: FormGroup
   isNew = true
-  expense!: Expense
+  income!: Income
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    private expensesService: ExpensesService) { }
+    private router: Router, private incomesService: IncomesService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required),
-      price: new FormControl(null, [Validators.required, Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]),
-      category: new FormControl(null, Validators.required),
+      amount: new FormControl(null, [Validators.required, Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]),
       date: new FormControl(null, Validators.required)
     })
     this.form.disable()
@@ -35,21 +33,20 @@ export class ExpensesFormComponent implements OnInit {
         (params: Params) => {
           if(params['id']) {
             this.isNew = false
-            return this.expensesService.findById(params['id'])
+            return this.incomesService.findById(params['id'])
           }
           return of(null)
         }  
       )
     ).subscribe(
       {
-        next: expense => {
-          if(expense){
-            this.expense = expense
+        next: income => {
+          if(income){
+            this.income = income
             this.form.patchValue({
-              name: expense.name,
-              price: expense.price,
-              date: expense.date,
-              category: expense.categoryDTO.id
+              name: income.name,
+              amount: income.amount,
+              date: income.date
             })
             MaterialsService.updateTextInputs()
           }
@@ -63,29 +60,26 @@ export class ExpensesFormComponent implements OnInit {
   onSubmit(){
     this.form.disable()
     let date: Date = this.form.getRawValue().date
-    let expense: Expense = {
+    let income: Income = {
       name: this.form.getRawValue().name,
-      price: parseFloat(this.form.getRawValue().price),
+      amount: parseFloat(this.form.getRawValue().amount),
       date: new Date(Date.UTC( date.getFullYear(), date.getMonth(), date.getDate())) ,
-      categoryDTO: {
-        id: this.form.getRawValue().category
-      },
       userDTO: {
         id: parseInt(localStorage.getItem(environment.userIdName) || '')
       }
     }
     let obs$
     if(this.isNew){
-      obs$ = this.expensesService.save(expense)
+      obs$ = this.incomesService.save(income)
     } else{
-      expense.id = this.expense.id
-      obs$ = this.expensesService.update(expense)
+      income.id = this.income.id
+      obs$ = this.incomesService.update(income)
     }
     obs$.subscribe({
       next: () => {
         MaterialsService.toast('Зміни збережено')
         this.form.enable()
-        this.router.navigate(['/main'])
+        this.router.navigate(['/incomes'])
       },
       error: error => {
         MaterialsService.toast(error.error.message)

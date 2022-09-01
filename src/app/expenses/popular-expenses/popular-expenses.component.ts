@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ExpensesAnalyticsView } from '../../model/expensesAnalyticsView';
@@ -17,15 +16,12 @@ export class PopularExpensesComponent implements OnInit {
   params!: RequestParams
   popularExpenses$!: Observable<ExpensesAnalyticsView[]>
   displayedColumns: string[] = ['position', 'name', 'price', 'count'];
-  helper = new JwtHelperService();
-  userId! : number;
 
   constructor(private analyticsService: ExpensesAnalyticsService) { }
 
   ngOnInit(): void {
-    this.userId  = this.helper.decodeToken(localStorage.getItem(environment.tokenName)|| '').id;
     this.params = {categoryId: this.categoryId, limit:5}
-    this.popularExpenses$ = this.analyticsService.getExpensesAnalytics(this.userId, this.params)
+    this.popularExpenses$ = this.analyticsService.getExpensesAnalytics(parseInt(localStorage.getItem(environment.userIdName) || ''), this.params)
   }
 
 }

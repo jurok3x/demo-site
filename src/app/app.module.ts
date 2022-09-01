@@ -30,6 +30,14 @@ import { PopularExpensesComponent } from './expenses/popular-expenses/popular-ex
 import {MatInputModule} from '@angular/material/input';
 import { DatepartSelectComponent } from './datepart-select/datepart-select.component';
 import { ExpensesFormComponent } from './expenses/expenses-form/expenses-form.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
+import { NgxChartsModule }from '@swimlane/ngx-charts';
+import { MonthAnalyticsComponent } from './analytics/month-analytics/month-analytics.component';
+import { CategoryAnalyticsComponent } from './analytics/category-analytics/category-analytics.component';
+import { IncomesComponent } from './incomes/incomes.component';
+import { IncomesFormComponent } from './incomes/incomes-form/incomes-form.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +57,11 @@ import { ExpensesFormComponent } from './expenses/expenses-form/expenses-form.co
     CategoriesFormComponent,
     PopularExpensesComponent,
     DatepartSelectComponent,
-    ExpensesFormComponent
+    ExpensesFormComponent,
+    MonthAnalyticsComponent,
+    CategoryAnalyticsComponent,
+    IncomesComponent,
+    IncomesFormComponent
   ],
   imports: [
     BrowserModule,
@@ -64,14 +76,19 @@ import { ExpensesFormComponent } from './expenses/expenses-form/expenses-form.co
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    NgxChartsModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: TokenInterceptor
-    }
+    },
+    MatDatepickerModule
   ],
   bootstrap: [AppComponent]
 })

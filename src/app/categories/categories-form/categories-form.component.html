@@ -39,7 +39,7 @@
             
         </div>
         <div *ngIf="category">
-            <app-popular-expenses [categoryId]="category.id"></app-popular-expenses>
+            <app-popular-expenses [categoryId]="category.id || 0"></app-popular-expenses>
         </div>
     </div>
 </div>

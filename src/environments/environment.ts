@@ -9,5 +9,6 @@ export const environment = {
   analyticsApiUrl: 'https://financemanager-analytics.herokuapp.com/',
   tokenName: 'jwt-token',
   analyticsTokenName: 'analytics-jwt-token',
+  userIdName: 'user-id',
   title: 'Finance App'
 };
