@@ -12,7 +12,7 @@ export class MonthAnalyticsService {
 
   constructor(private http: HttpClient) { }
 
-  public getMonthAnalytics(userId: number, requestParams: RequestParams): Observable<MonthAnalyticsView[]>{
+  public getMonthExpensesAnalytics(userId: number, requestParams: RequestParams): Observable<MonthAnalyticsView[]>{
     let parameters = new HttpParams()
     if(requestParams.categoryId) {
       parameters = parameters.append("categoryId", requestParams.categoryId)
@@ -20,6 +20,22 @@ export class MonthAnalyticsService {
     if(requestParams.year) {
       parameters = parameters.append("year", requestParams.year)
     }
-    return this.http.get<MonthAnalyticsView[]>(`${environment.analyticsApiUrl}api/analytics/expenses/month/user/${userId}`, {params: parameters})
+    return this.http.get<MonthAnalyticsView[]>(`${environment.analyticsApiUrl}api/analytics/month/expenses/user/${userId}`, {params: parameters})
+  }
+
+  public getMonthIncomesAnalytics(userId: number, requestParams: RequestParams): Observable<MonthAnalyticsView[]>{
+    let parameters = new HttpParams()
+    if(requestParams.year) {
+      parameters = parameters.append("year", requestParams.year)
+    }
+    return this.http.get<MonthAnalyticsView[]>(`${environment.analyticsApiUrl}api/analytics/month/incomes/user/${userId}`, {params: parameters})
+  }
+
+  public getMonthBalanceAnalytics(userId: number, requestParams: RequestParams): Observable<MonthAnalyticsView[]>{
+    let parameters = new HttpParams()
+    if(requestParams.year) {
+      parameters = parameters.append("year", requestParams.year)
+    }
+    return this.http.get<MonthAnalyticsView[]>(`${environment.analyticsApiUrl}api/analytics/month/balance/user/${userId}`, {params: parameters})
   }
 }

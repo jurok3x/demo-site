@@ -22,9 +22,9 @@ const routes: Routes = [
     { path: 'registration', component: RegistrationComponent }
   ] },
   { path: '', canActivate: [AuthGuard], component: SiteLayoutComponent, children: [
-    { path: 'main', component: MainComponent },
-    { path: 'main/expenses/new', component: ExpensesFormComponent },
-    { path: 'main/expenses/:id', component: ExpensesFormComponent },
+    { path: 'expenses', component: MainComponent },
+    { path: 'expenses/new', component: ExpensesFormComponent },
+    { path: 'expenses/:id', component: ExpensesFormComponent },
     { path: 'categories', component: CategoriesComponent },
     { path: 'categories/new', component: CategoriesFormComponent },
     { path: 'categories/:id', component: CategoriesFormComponent },

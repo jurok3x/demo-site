@@ -18,3 +18,9 @@
  .advanced-pie{
     height: 200px;
  }
+
+ .advanced-pie-legend-wrapper {
+    display: block !important;
+    position: relative;
+    top: 10px;
+ }

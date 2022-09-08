@@ -46,7 +46,7 @@ export class IncomesFormComponent implements OnInit {
             this.form.patchValue({
               name: income.name,
               amount: income.amount,
-              date: income.date
+              date: new Date(income.date)
             })
             MaterialsService.updateTextInputs()
           }

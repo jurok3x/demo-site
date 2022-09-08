@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestParams } from '../model/requestParams';
 
 @Component({
   selector: 'app-analytics',
@@ -6,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
-
-  
 
   constructor() { }
 

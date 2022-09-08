@@ -58,7 +58,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       next: () => {
         localStorage.setItem(environment.userIdName,
           this.helper.decodeToken(localStorage.getItem(environment.tokenName)|| '').id)
-        this.router.navigate(['/main'])
+        this.router.navigate(['/expenses'])
       },
       error: error => {
         MaterialsService.toast(error.error.message)

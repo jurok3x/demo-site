@@ -1,68 +1,71 @@
-<div class="row">
-  <div class="col s12">
-    <div class="page-title">
-      <h4>Витрати</h4>
-      <button routerLink="/main/expenses/new" class="waves-effect waves-light btn grey darken-1">Додати</button>
+<mat-card>
+  <mat-card-title>
+  <div class="row">
+    <div class="col s12">
+      <div class="page-title">
+        <h4>Витрати</h4>
+        <button routerLink="/main/expenses/new" class="waves-effect waves-light btn grey darken-1">Додати</button>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="row" *ngIf="expenses; else loader">
-  <div class="col-9">
-      <table *ngIf="expenses.length !== 0; else empty" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> № </th>
-          <td mat-cell *matCellDef="let expense; let i = index"> {{this.paginator.pageIndex == 0 ? i + 1 : 1 + i + this.paginator.pageIndex * this.paginator.pageSize}} </td>
-        </ng-container>
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef > Назва </th>
-          <td mat-cell *matCellDef="let expense"> {{expense.name}} </td>
-        </ng-container>
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef> Ціна </th>
-          <td mat-cell *matCellDef="let expense"> {{expense.price}} </td>
-        </ng-container>
-        <ng-container matColumnDef="categoryDTO.name">
-          <th mat-header-cell *matHeaderCellDef> Категорія </th>
-          <td mat-cell *matCellDef="let expense"> {{expense.categoryDTO.name}} </td>
-        </ng-container>
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef> Дата </th>
-          <td mat-cell *matCellDef="let expense"> {{expense.date | date:'dd/MM/y'}} </td>
-        </ng-container>
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Редагувати/Видалити </th>
-          <td mat-cell *matCellDef="let expense">
-            <button class="btn btn-small green mrg-r10" (click)="edit(expense.id)">
-              <i class="material-icons">edit</i>
-            </button>
-            <button class="btn btn-small red" (click)="delete(expense.id)">
-              <i class="material-icons">delete</i>
-            </button>
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-  </div>
-  <div class="col-3">
-    <div class="page-title">
-      <h4>Фільтр</h4>   
+ </mat-card-title>
+ <mat-card-content>
+  <div class="row" *ngIf="expenses; else loader">
+    <div class="col-9">
+        <table *ngIf="expenses.length !== 0; else empty" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> № </th>
+            <td mat-cell *matCellDef="let expense; let i = index"> {{this.paginator.pageIndex == 0 ? i + 1 : 1 + i + this.paginator.pageIndex * this.paginator.pageSize}} </td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef > Назва </th>
+            <td mat-cell *matCellDef="let expense"> {{expense.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Ціна </th>
+            <td mat-cell *matCellDef="let expense"> {{expense.price}} </td>
+          </ng-container>
+          <ng-container matColumnDef="categoryDTO.name">
+            <th mat-header-cell *matHeaderCellDef> Категорія </th>
+            <td mat-cell *matCellDef="let expense"> {{expense.categoryDTO.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Дата </th>
+            <td mat-cell *matCellDef="let expense"> {{expense.date | date:'dd/MM/y'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Редагувати/Видалити </th>
+            <td mat-cell *matCellDef="let expense">
+              <button title="Редагувати" class="btn btn-small green mrg-r10" (click)="edit(expense.id)">
+                <i class="material-icons">edit</i>
+              </button>
+              <button title="Видалити" class="btn btn-small red" (click)="delete(expense.id)">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
     </div>
-    <app-category-select (categoryEvent)="setCategoryId($event)"></app-category-select>
-    <app-datepart-select (yearEvent)="setYear($event)" (monthEvent)="setMonth($event)"></app-datepart-select>
+    <div class="col-3">
+      <div class="page-title">
+        <h4>Фільтр</h4>   
+      </div>
+      <app-category-select (categoryEvent)="setCategoryId($event)"></app-category-select>
+      <app-datepart-select (yearEvent)="setYear($event)" (monthEvent)="setMonth($event)"></app-datepart-select>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-9">
-    <mat-paginator  [pageSizeOptions]="[10, 25, 50]"
-    showFirstLastButtons 
-    aria-label="Виберіть кількість витрат на сторінку">
-   </mat-paginator>
+  <div class="row">
+    <div class="col-9">
+      <mat-paginator  [pageSizeOptions]="[10, 25, 50]"
+      showFirstLastButtons 
+      aria-label="Виберіть кількість витрат на сторінку">
+    </mat-paginator>
+    </div>
   </div>
-
-</div>
-
+  </mat-card-content>
+</mat-card>
 <ng-template #empty>
   <div class="center">Витрат немає</div>
 </ng-template>

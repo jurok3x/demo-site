@@ -1,5 +1,5 @@
 <ul class="sidenav sidenav-fixed a-sidenav">
-    <h4>Finance manager</h4>
+    <h4 class="m10">Finance manager</h4>
     <li class="bold" routerLinkActive="active" *ngFor="let link of links">
         <a [routerLink]="[link.url]" class="waves-effect waves-orange">{{link.name}}</a>
     </li>
@@ -15,8 +15,9 @@
         <i class="large material-icons">add</i>
     </a>
     <ul>
-        <li><a class="btn-floating green"><i class="material-icons">assignment</i></a></li>
-        <li><a class="btn-floating blue"><i class="material-icons">list</i></a></li>
+        <li><a title="Додати витрату" class="btn-floating green" routerLink="/expenses/new"><i class="material-icons">payments</i></a></li>
+        <li><a title="Додати дохід" class="btn-floating yellow" routerLink="/expenses/new"><i class="material-icons">savings</i></a></li>
+        <li><a title="Додати категорію" class="btn-floating blue" routerLink="/categories/new"><i class="material-icons">list</i></a></li>
     </ul>
 </div>
 

@@ -38,6 +38,7 @@ import { MonthAnalyticsComponent } from './analytics/month-analytics/month-analy
 import { CategoryAnalyticsComponent } from './analytics/category-analytics/category-analytics.component';
 import { IncomesComponent } from './incomes/incomes.component';
 import { IncomesFormComponent } from './incomes/incomes-form/incomes-form.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { IncomesFormComponent } from './incomes/incomes-form/incomes-form.compon
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatButtonToggleModule
   ],
   providers: [
     {
