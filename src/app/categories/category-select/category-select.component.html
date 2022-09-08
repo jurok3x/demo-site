@@ -1,15 +1,20 @@
-<h4>Категорія:</h4>
-<mat-form-field appearance="fill" *ngIf="categories && parentForm" [formGroup]="parentForm">
+<div *ngIf="categories; else empty">
+  <h4>Категорія:</h4>
+  <mat-form-field appearance="fill" *ngIf="parentForm" [formGroup]="parentForm">
     <mat-label>Виберіть категорію</mat-label>
       <mat-select #categoryId [formControlName]="'category'">
         <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
       </mat-select>
-</mat-form-field>
+    </mat-form-field>
 
-<mat-form-field appearance="fill" *ngIf="categories && !parentForm">
-  <mat-label>Виберіть категорію</mat-label>
-    <mat-select (selectionChange)="changeCategory(categoryId.value)" #categoryId >
-      <mat-option>Всі категорії</mat-option>
-      <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
-    </mat-select>
-</mat-form-field>
+    <mat-form-field appearance="fill" *ngIf="!parentForm">
+      <mat-label>Виберіть категорію</mat-label>
+        <mat-select (selectionChange)="changeCategory(categoryId.value)" #categoryId >
+          <mat-option>Всі категорії</mat-option>
+          <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<ng-template #empty>
+  <div class="center">У вас немає категорій</div>
+</ng-template>

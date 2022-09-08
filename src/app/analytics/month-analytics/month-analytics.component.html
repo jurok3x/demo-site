@@ -1,18 +1,24 @@
 <div class="row">
-    <div class="col-9">
-        <ngx-charts-bar-vertical *ngIf="monthAnalytics$ | async as monthAnalytics"
+    <div class="col-9" *ngIf="lineChartView; else empty">
+        <ngx-charts-line-chart *ngIf="lineChartView.length == analyticsType.length; else loader"
             [view]="[1000,400]"
-            [results]="monthAnalytics"
+            [results]="lineChartView"
             [xAxisLabel]="'Місяць'"
             [legendTitle]="'Графік річних витрат'"
             [yAxisLabel]="'Витрати, грн.'"
-            [legend]="true"
             [showXAxisLabel]="true"
             [showYAxisLabel]="true"
             [xAxis]="true"
-            [yAxis]="true"
-            [gradient]="true">
-        </ngx-charts-bar-vertical>
+            [xScaleMin]="1"
+            [xScaleMax]="12"
+            [autoScale]="true"
+            [yAxis]="true">
+        </ngx-charts-line-chart>
+        <mat-button-toggle-group name="selections" aria-label="Selections" multiple [(ngModel)]="analyticsType" (change)="selectionChange()">
+            <mat-button-toggle value="expenses" checked="true">Витрати</mat-button-toggle>
+            <mat-button-toggle value="incomes" checked="true">Доходи</mat-button-toggle>
+            <mat-button-toggle value="balance">Різниця</mat-button-toggle>
+        </mat-button-toggle-group>
     </div>
     <div class="col-3">
         <div class="page-title">
@@ -20,5 +26,12 @@
           </div>
           <app-category-select (categoryEvent)="setCategoryId($event)"></app-category-select>
           <app-datepart-select [isMonth]="false" (yearEvent)="setYear($event)"></app-datepart-select>
-        </div>
+    </div>
+    <ng-template #loader>
+        <app-loader></app-loader>
+    </ng-template>
+    
+    <ng-template #empty>
+        <div class="center">У вас немає категорій</div>
+    </ng-template>
 </div>

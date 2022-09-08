@@ -21,7 +21,7 @@ export class CategoryAnalyticsService {
       parameters = parameters.append("year", requestParams.year)
     }
     if(requestParams.month) {
-      parameters = parameters.append("month", requestParams.month)
+      parameters = parameters.append("month", requestParams.month + 1)
     }
     return this.http.get<CategoryAnalyticsView[]>(`${environment.analyticsApiUrl}api/analytics/expenses/category/user/${userId}`, {params: parameters})
   }

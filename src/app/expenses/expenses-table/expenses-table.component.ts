@@ -47,7 +47,7 @@ export class ExpensesTableComponent implements OnInit, AfterViewInit {
   }
 
   edit(expenseId: number) {
-    this.router.navigate([`/main/expenses/${expenseId}`])
+    this.router.navigate([`/expenses/${expenseId}`])
   }
 
   getExpenses() {

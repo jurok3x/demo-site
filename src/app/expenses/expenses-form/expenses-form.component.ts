@@ -17,6 +17,7 @@ export class ExpensesFormComponent implements OnInit {
   form!: FormGroup
   isNew = true
   expense!: Expense
+  categoryId= 2
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -48,7 +49,7 @@ export class ExpensesFormComponent implements OnInit {
             this.form.patchValue({
               name: expense.name,
               price: expense.price,
-              date: expense.date,
+              date: new Date(expense.date),
               category: expense.categoryDTO.id
             })
             MaterialsService.updateTextInputs()
@@ -66,7 +67,7 @@ export class ExpensesFormComponent implements OnInit {
     let expense: Expense = {
       name: this.form.getRawValue().name,
       price: parseFloat(this.form.getRawValue().price),
-      date: new Date(Date.UTC( date.getFullYear(), date.getMonth(), date.getDate())) ,
+      date: new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())) ,
       categoryDTO: {
         id: this.form.getRawValue().category
       },
@@ -77,7 +78,7 @@ export class ExpensesFormComponent implements OnInit {
     let obs$
     if(this.isNew){
       obs$ = this.expensesService.save(expense)
-    } else{
+    } else {
       expense.id = this.expense.id
       obs$ = this.expensesService.update(expense)
     }
@@ -85,7 +86,7 @@ export class ExpensesFormComponent implements OnInit {
       next: () => {
         MaterialsService.toast('Зміни збережено')
         this.form.enable()
-        this.router.navigate(['/main'])
+        this.router.navigate(['/expenses'])
       },
       error: error => {
         MaterialsService.toast(error.error.message)

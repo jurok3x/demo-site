@@ -14,7 +14,7 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
   floatingRef!: ElementRef;
 
   links = [
-    {url:'/main', name: 'Витрати'},
+    {url:'/expenses', name: 'Витрати'},
     {url:'/incomes', name: 'Доходи'},
     {url:'/analytics', name: 'Аналітика'},
     {url:'/categories', name: 'Категорії'}

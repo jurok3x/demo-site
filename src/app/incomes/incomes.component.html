@@ -29,10 +29,10 @@
                       <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Редагувати/Видалити </th>
                         <td mat-cell *matCellDef="let income">
-                          <button class="btn btn-small green mrg-r10" (click)="edit(income.id)">
+                          <button title="Редагувати" class="btn btn-small green mrg-r10" (click)="edit(income.id)">
                             <i class="material-icons">edit</i>
                           </button>
-                          <button class="btn btn-small red" (click)="delete(income.id)">
+                          <button title="Видалити" class="btn btn-small red" (click)="delete(income.id)">
                             <i class="material-icons">delete</i>
                           </button>
                         </td>

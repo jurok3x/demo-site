@@ -1,12 +1,14 @@
 <div class="row">
-    <div class="col-9">
-        <ngx-charts-advanced-pie-chart *ngIf="sumAnalytics" 
+    <div class="col-6">
+        <ngx-charts-advanced-pie-chart *ngIf="sumAnalytics; else loader" 
             [results]="sumAnalytics"
             [gradient]="true"
-            [view]="[1000,300]"
+            [view]="[1000,330]"
             [label]="'Всього'">
         </ngx-charts-advanced-pie-chart>
-        <table *ngIf="countAnalytics" mat-table [dataSource]="countAnalytics" class="mat-elevation-z8">
+    </div>
+    <div class="col-3">
+        <table *ngIf="countAnalytics; else loader" mat-table [dataSource]="countAnalytics" class="mat-elevation-z8">
             <ng-container matColumnDef="position">
                 <th mat-header-cell *matHeaderCellDef> № </th>
                 <td mat-cell *matCellDef="let view; let i = index"> {{i+1}} </td>
@@ -28,5 +30,8 @@
             <h4>Фільтр</h4>   
           </div>
           <app-datepart-select (yearEvent)="setYear($event)" (monthEvent)="setMonth($event)"></app-datepart-select>
-        </div>
+    </div>
+    <ng-template #loader>
+      <app-loader></app-loader>
+    </ng-template>
 </div>
