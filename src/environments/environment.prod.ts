@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  siteUrl: 'https://finance-manager.herokuapp.com/',
+  siteUrl: 'https://top-finance-manager.herokuapp.com/',
   apiUrl: 'https://myapp-12344.herokuapp.com/',
   analyticsApiUrl: 'https://financemanager-analytics.herokuapp.com/',
   tokenName: 'jwt-token',
