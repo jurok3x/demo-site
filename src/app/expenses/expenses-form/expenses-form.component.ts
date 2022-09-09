@@ -17,7 +17,6 @@ export class ExpensesFormComponent implements OnInit {
   form!: FormGroup
   isNew = true
   expense!: Expense
-  categoryId= 2
 
   constructor(private route: ActivatedRoute,
     private router: Router,
